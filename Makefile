@@ -6,7 +6,7 @@ PROG=update-cache show-diff init-db write-tree read-tree commit-tree cat-file
 all: $(PROG)
 
 install: $(PROG)
-	install $(PROG) $(HOME)/bin/
+	install $(PROG) /data/build/git/bin/
 
 LIBS= -lssl -lz -lcrypto
 

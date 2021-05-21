@@ -169,7 +169,7 @@ int write_sha1_buffer(unsigned char *sha1, void *buf, unsigned int size)
 {
 	char *filename = sha1_file_name(sha1);
 	int i, fd;
-
+        fprintf(stderr, "filename: %s\n", filename);
 	fd = open(filename, O_WRONLY | O_CREAT | O_EXCL, 0666);
 	if (fd < 0)
 		return (errno == EEXIST) ? 0 : -1;

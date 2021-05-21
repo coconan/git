@@ -75,6 +75,7 @@ static int add_cache_entry(struct cache_entry *ce)
 
 static int index_fd(const char *path, int namelen, struct cache_entry *ce, int fd, struct stat *st)
 {
+	int i;
 	z_stream stream;
 	int max_out_bytes = namelen + st->st_size + 200;
 	void *out = malloc(max_out_bytes);
@@ -112,7 +113,11 @@ static int index_fd(const char *path, int namelen, struct cache_entry *ce, int f
 	SHA1_Init(&c);
 	SHA1_Update(&c, out, stream.total_out);
 	SHA1_Final(ce->sha1, &c);
-
+	fprintf(stderr, "ce->sha1: ");
+	for (i=0; i < 20; i++) {
+            fprintf(stderr, "%d ", ce->sha1[i]);
+	}
+	fprintf(stderr, "\n");
 	return write_sha1_buffer(ce->sha1, out, stream.total_out);
 }
 
